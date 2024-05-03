@@ -1,0 +1,101 @@
+{
+    "people": [
+        {
+            "name": "John Doe",
+            "initials": "JD",
+            "contact_details": "john@example.com",
+            "preferences": [
+                {
+                    "initials": "AB",
+                    "flag": true
+                }
+            ]
+        },
+        {
+            "name": "Alice Smith",
+            "initials": "AS",
+            "contact_details": "alice@example.com"
+        },
+        {
+            "name": "Bob Johnson",
+            "initials": "BJ",
+            "contact_details": "bob@example.com"
+        },
+        {
+            "name": "Charlie Brown",
+            "initials": "CB",
+            "contact_details": "charlie@example.com",
+            "preferences": [
+                {
+                    "initials": "DE",
+                    "flag": false
+                }
+            ]
+        },
+        {
+            "name": "David Lee",
+            "initials": "DL",
+            "contact_details": "david@example.com"
+        },
+        {
+            "name": "Eve Taylor",
+            "initials": "ET",
+            "contact_details": "eve@example.com"
+        },
+        {
+            "name": "Frank White",
+            "initials": "FW",
+            "contact_details": "frank@example.com",
+            "preferences": [
+                {
+                    "initials": "GH",
+                    "flag": true
+                }
+            ]
+        },
+        {
+            "name": "Grace Miller",
+            "initials": "GM",
+            "contact_details": "grace@example.com"
+        },
+        {
+            "name": "Henry Clark",
+            "initials": "HC",
+            "contact_details": "henry@example.com"
+        },
+        {
+            "name": "Ivy Garcia",
+            "initials": "IG",
+            "contact_details": "ivy@example.com",
+            "preferences": [
+                {
+                    "initials": "JK",
+                    "flag": false
+                }
+            ]
+        }
+    ],
+    "last_scheduled_people": [
+        {
+            "name": "Grace Miller",
+            "initials": "GM",
+            "contact_details": "grace@example.com"
+        },
+        {
+            "name": "Alice Smith",
+            "initials": "AS",
+            "contact_details": "alice@example.com"
+        },
+        {
+            "name": "Ivy Garcia",
+            "initials": "IG",
+            "contact_details": "ivy@example.com",
+            "preferences": [
+                {
+                    "initials": "JK",
+                    "flag": false
+                }
+            ]
+        }
+    ]
+}
