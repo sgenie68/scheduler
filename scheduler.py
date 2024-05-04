@@ -10,10 +10,9 @@ class Scheduler:
         with open(self.json_file, 'r') as file:
             self.data = json.load(file)
         self.remaining_people = self.data['people'].copy()
-        self.last_scheduled_people = self.data.get('last_scheduled_people', [])
+        self.last_scheduled_people = []
 
     def save_data(self):
-        self.data['last_scheduled_people'] = self.last_scheduled_people
         with open(self.json_file, 'w') as file:
             json.dump(self.data, file, indent=4)
 
@@ -22,32 +21,40 @@ class Scheduler:
             print("Not enough people remaining.")
             return []
 
-        if len(self.remaining_people) == len(self.last_scheduled_people):
-            print("All people have been scheduled. Resetting.")
-            self.remaining_people = self.data['people'].copy()
-            self.last_scheduled_people = []
+        scheduled_people = []
 
-        print(len(self.last_scheduled_people))
-        # Ensure previously scheduled people are not selected
-        available_people = [person for person in self.remaining_people if person not in self.last_scheduled_people]
-        print(available_people)
-        scheduled_people = random.sample(available_people, num_people)
+        while len(scheduled_people) < num_people:
+            if len(self.remaining_people) == 0:
+                print("Unable to fulfill preferences for remaining people.")
+                return []
 
-        # Check preferences
-        for person in scheduled_people:
-            if 'preferences' in person:
-                for pref in person['preferences']:
+            available_people = [person for person in self.remaining_people if person not in scheduled_people]
+            selected_person = random.choice(available_people)
+
+            # Check preferences for the selected person
+            if 'preferences' in selected_person:
+                for pref in selected_person['preferences']:
                     initials, flag = pref['initials'], pref['flag']
-                    for other_person in scheduled_people:
-                        if other_person['initials'] == initials:
-                            if (flag and other_person['initials'] not in [p['initials'] for p in person['preferences']]) or (not flag and other_person['initials'] in [p['initials'] for p in person['preferences']]):
-                                print(f"Preference violated: {person['name']} ({person['initials']}) and {other_person['name']} ({other_person['initials']})")
-                                # Reschedule
-                                return self.schedule(num_people)
+                    if flag:
+                        for person in self.remaining_people:
+                            if person['initials'] == initials and person not in scheduled_people:
+                                scheduled_people.append(person)
+                                break
+                    else:
+                        for person in scheduled_people:
+                            if person['initials'] == initials:
+                                scheduled_people.remove(person)
+                                break
 
+            scheduled_people.append(selected_person)
+
+        if len(scheduled_people)>num_people:
+            selected_person = random.choice(scheduled_people)
+            scheduled_people.remove(selected_person)
         # Update state
-        self.last_scheduled_people=scheduled_people # Extend instead of assigning directly
+        self.last_scheduled_people = scheduled_people
         self.remaining_people = [person for person in self.remaining_people if person not in scheduled_people]
+
         self.save_data()
         return scheduled_people
 

@@ -6,7 +6,7 @@
             "contact_details": "john@example.com",
             "preferences": [
                 {
-                    "initials": "AB",
+                    "initials": "AS",
                     "flag": true
                 }
             ]
@@ -77,25 +77,25 @@
     ],
     "last_scheduled_people": [
         {
-            "name": "Grace Miller",
-            "initials": "GM",
-            "contact_details": "grace@example.com"
+            "name": "Henry Clark",
+            "initials": "HC",
+            "contact_details": "henry@example.com"
         },
         {
-            "name": "Alice Smith",
-            "initials": "AS",
-            "contact_details": "alice@example.com"
-        },
-        {
-            "name": "Ivy Garcia",
-            "initials": "IG",
-            "contact_details": "ivy@example.com",
+            "name": "John Doe",
+            "initials": "JD",
+            "contact_details": "john@example.com",
             "preferences": [
                 {
-                    "initials": "JK",
-                    "flag": false
+                    "initials": "AS",
+                    "flag": true
                 }
             ]
+        },
+        {
+            "name": "Eve Taylor",
+            "initials": "ET",
+            "contact_details": "eve@example.com"
         }
     ]
 }
