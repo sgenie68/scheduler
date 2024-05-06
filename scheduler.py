@@ -64,5 +64,5 @@ scheduler = Scheduler('people.json')
 scheduled_people = scheduler.schedule(3)
 print("Scheduled People:")
 for person in scheduled_people:
-    print(person)
+    print(person["name"])
 
