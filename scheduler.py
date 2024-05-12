@@ -63,7 +63,7 @@ class Scheduler:
 
 def main(args):
     scheduler = Scheduler(args.input)
-    scheduled_people = scheduler.schedule(2)
+    scheduled_people = scheduler.schedule(args.count)
     print("Scheduled People:")
     for person in scheduled_people:
         print(person)
