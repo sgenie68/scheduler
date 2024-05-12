@@ -1,0 +1,40 @@
+{
+    "people": [
+        {
+            "name": "John Doe",
+            "initials": "JD"
+        },
+        {
+            "name": "Alice Smith",
+            "initials": "AS"
+        },
+        {
+            "name": "Bob Johnson",
+            "initials": "BJ"
+        },
+        {
+            "name": "Charlie Brown",
+            "initials": "CB"
+        },
+        {
+            "name": "David Lee",
+            "initials": "DL"
+        },
+        {
+            "name": "Frank White",
+            "initials": "FW"
+        },
+        {
+            "name": "Grace Miller",
+            "initials": "GM"
+        },
+        {
+            "name": "Henry Clark",
+            "initials": "HC"
+        },
+        {
+            "name": "Ivy Garcia",
+            "initials": "IG"
+        }
+    ]
+}

@@ -1,5 +1,7 @@
 import json
 import random
+import argparse
+
 
 class Scheduler:
     def __init__(self, json_file):
@@ -59,10 +61,22 @@ class Scheduler:
         return scheduled_people
 
 
-# Example usage:
-scheduler = Scheduler('people.json')
-scheduled_people = scheduler.schedule(3)
-print("Scheduled People:")
-for person in scheduled_people:
-    print(person)
+def main(args):
+    scheduler = Scheduler(args.input)
+    scheduled_people = scheduler.schedule(2)
+    print("Scheduled People:")
+    for person in scheduled_people:
+        print(person)
 
+if __name__=="__main__":
+    parser = argparse.ArgumentParser(description='Scheduler')
+    parser.add_argument('--input', '-i', required=True, dest='input', type=str, help='Input file name')
+    parser.add_argument('--count', '-c', dest='count', type=int, default=2, help='Number of people to schedule, must be above 1')
+    args = parser.parse_args()
+    if args.count<2:
+        print("Number of people to count must be >2")
+        exit(1)
+    try:
+        main(args)
+    except Exception as ex:
+        print(ex)
