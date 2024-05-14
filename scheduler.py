@@ -19,6 +19,11 @@ class Scheduler:
         with open(self.json_file, 'w') as file:
             json.dump(self.data, file, indent=4)
 
+    def to_schedule(self,person):
+        if not "schedule" in person:
+            return True
+        return person["schedule"]
+
     def schedule(self, num_people):
         if len(self.remaining_people) < num_people:
             print("Not enough people remaining.")
@@ -31,7 +36,7 @@ class Scheduler:
                 print("Unable to fulfill preferences for remaining people.")
                 return []
 
-            available_people = [person for person in self.remaining_people if person not in scheduled_people]
+            available_people = [person for person in self.remaining_people if person not in scheduled_people and self.to_schedule(person)]
             selected_person = random.choice(available_people)
 
             # Check preferences for the selected person
