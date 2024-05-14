@@ -12,9 +12,10 @@ class Scheduler:
         with open(self.json_file, 'r') as file:
             self.data = json.load(file)
         self.remaining_people = self.data['people'].copy()
-        self.last_scheduled_people = []
+        self.last_scheduled_people = self.data.get('last_scheduled_people', [])
 
     def save_data(self):
+        self.data['last_scheduled_people'] = self.last_scheduled_people
         with open(self.json_file, 'w') as file:
             json.dump(self.data, file, indent=4)
 
