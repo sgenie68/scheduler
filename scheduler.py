@@ -14,8 +14,9 @@ class Scheduler:
         with open(self.json_file, 'r') as file:
             self.data = json.load(file)
         p = self.data['people'].copy()
+        self.all_people=[one for one in p if "initials" in one]
         self.last_scheduled_people = self.data.get('last_scheduled_people', [])
-        self.remaining_people = [person for person in p if not person in self.last_scheduled_people]
+        self.remaining_people = [person for person in self.all_people if not person["initials"] in self.last_scheduled_people and self.to_schedule(person)]
     
 
     def save_data(self):
@@ -30,14 +31,20 @@ class Scheduler:
 
     def find_person(self,p,lst):
         if not "initials" in p:
-            return False
+            return None
         for l in lst:
             if "initials" in l and l["initials"]==p["initials"]:
-                return True
-        return False
+                return l
+        return None
+
+    def find_person_initials(self,p,lst):
+        for l in lst:
+            if "initials" in l and l["initials"]==p:
+                return l
+        return None
 
     def schedule(self, num_people):
-        if len(self.remaining_people) < num_people:
+        if len(self.remaining_people)+len(self.last_scheduled_people) < num_people:
             print("Not enough people remaining.")
             return []
 
@@ -45,11 +52,20 @@ class Scheduler:
 
         while len(scheduled_people) < num_people:
             if len(self.remaining_people) == 0:
-                print("Unable to fulfill preferences, not enough people.")
-                return []
+                #load from last scheduled
+                for p in self.last_scheduled_people:
+                    another_person=self.find_person_initials(p,self.all_people)
+                    if another_person and self.to_schedule(another_person):
+                        self.remaining_people.append(another_person)
+                self.last_scheduled_people=[]
+                if(len(scheduled_people)+len(self.remaining_people)<num_people):
+                    print("Unable to schedule due to not enough people")
+                    return []
 
-            available_people = [person for person in self.remaining_people if not person in scheduled_people and self.to_schedule(person)]
-            selected_person = random.choice(available_people)
+            available_people = [person for person in self.remaining_people if not person in scheduled_people]
+            selected_person = random.choice(self.remaining_people)
+            self.remaining_people.remove(selected_person)
+            scheduled_people.append(selected_person)
 
             # Check preferences for the selected person
             if 'preferences' in selected_person:
@@ -57,7 +73,7 @@ class Scheduler:
                     initials, flag = pref['initials'], pref['flag']
                     if flag:
                         for person in self.remaining_people:
-                            if person['initials'] == initials and person not in scheduled_people:
+                            if person['initials'] == initials:
                                 scheduled_people.append(person)
                                 break
                     else:
@@ -66,14 +82,13 @@ class Scheduler:
                                 scheduled_people.remove(person)
                                 break
 
-            scheduled_people.append(selected_person)
 
         if len(scheduled_people)>num_people:
             selected_person = random.choice(scheduled_people)
+            self.remaining_people.append(selected_person)
             scheduled_people.remove(selected_person)
         # Update state
-        self.last_scheduled_people = scheduled_people
-        self.remaining_people = [person for person in self.remaining_people if person not in scheduled_people]
+        self.last_scheduled_people = [i["initials"] for i in scheduled_people]
 
         self.save_data()
         return scheduled_people
