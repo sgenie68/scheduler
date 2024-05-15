@@ -1,10 +1,12 @@
 import json
 import random
 import argparse
+from datetime import datetime
 
 
 class Scheduler:
     def __init__(self, json_file):
+        random.seed(datetime.now().timestamp())
         self.json_file = json_file
         self.load_data()
 

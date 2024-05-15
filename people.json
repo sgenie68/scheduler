@@ -3,7 +3,7 @@
         {
             "name": "John Doe",
             "initials": "JD",
-            "schedule": false,
+            "schedule": true,
             "contact_details": "john@example.com",
             "preferences": [
                 {
@@ -78,25 +78,19 @@
     ],
     "last_scheduled_people": [
         {
-            "name": "Alice Smith",
-            "initials": "AS",
-            "contact_details": "alice@example.com"
+            "name": "Grace Miller",
+            "initials": "GM",
+            "contact_details": "grace@example.com"
         },
         {
-            "name": "Ivy Garcia",
-            "initials": "IG",
-            "contact_details": "ivy@example.com",
-            "preferences": [
-                {
-                    "initials": "JK",
-                    "flag": false
-                }
-            ]
+            "name": "Henry Clark",
+            "initials": "HC",
+            "contact_details": "henry@example.com"
         },
         {
-            "name": "Eve Taylor",
-            "initials": "ET",
-            "contact_details": "eve@example.com"
+            "name": "David Lee",
+            "initials": "DL",
+            "contact_details": "david@example.com"
         }
     ]
 }
