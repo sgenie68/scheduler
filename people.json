@@ -75,22 +75,5 @@
                 }
             ]
         }
-    ],
-    "last_scheduled_people": [
-        {
-            "name": "Grace Miller",
-            "initials": "GM",
-            "contact_details": "grace@example.com"
-        },
-        {
-            "name": "Henry Clark",
-            "initials": "HC",
-            "contact_details": "henry@example.com"
-        },
-        {
-            "name": "David Lee",
-            "initials": "DL",
-            "contact_details": "david@example.com"
-        }
     ]
 }
