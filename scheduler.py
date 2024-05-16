@@ -55,14 +55,13 @@ class Scheduler:
                 #load from last scheduled
                 for p in self.last_scheduled_people:
                     another_person=self.find_person_initials(p,self.all_people)
-                    if another_person and self.to_schedule(another_person):
+                    if another_person and self.to_schedule(another_person) and not self.find_person(another_person,scheduled_people):
                         self.remaining_people.append(another_person)
                 self.last_scheduled_people=[]
                 if(len(scheduled_people)+len(self.remaining_people)<num_people):
                     print("Unable to schedule due to not enough people")
                     return []
 
-            available_people = [person for person in self.remaining_people if not person in scheduled_people]
             selected_person = random.choice(self.remaining_people)
             self.remaining_people.remove(selected_person)
             scheduled_people.append(selected_person)
