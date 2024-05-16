@@ -53,25 +53,12 @@ class Scheduler:
         while len(scheduled_people) < num_people:
             if len(self.remaining_people) == 0:
                 #load from last scheduled
-                print("Scheduled: ",len(scheduled_people))
-                for p in self.last_scheduled_people:
-                    another_person=self.find_person_initials(p,self.all_people)
+                for another_person in self.all_people:
                     if another_person and self.to_schedule(another_person) and not self.find_person(another_person,scheduled_people):
                         self.remaining_people.append(another_person)
-                print("********************")
-                print(len(self.all_people),len(self.remaining_people),len(self.last_scheduled_people))
-                print(self.remaining_people)
-                print("----------------------------")
-                print([x for x in self.all_people if x not in self.remaining_people])
-                print("********************")
 
                 self.last_scheduled_people=[]
                 if(len(scheduled_people)+len(self.remaining_people)<num_people):
-                    print(len(scheduled_people)+len(self.remaining_people))
-                    print("Scheduled:")
-                    print(scheduled_people)
-                    print("Remaininig:")
-                    print(self.remaining_people)
                     print("Unable to schedule due to not enough people")
                     return []
 
