@@ -75,6 +75,7 @@ class Scheduler:
                             person=self.find_person_initials(initials,self.remaining_people)
                             if person:
                                 scheduled_people.append(person)
+                                self.remaining_people.remove(person)
                     else:
                         person=self.find_person_initials(initials,scheduled_people)
                         if person:
