@@ -71,10 +71,11 @@ class Scheduler:
                 for pref in selected_person['preferences']:
                     initials, flag = pref['initials'], pref['flag']
                     if flag:
-                        for person in self.remaining_people:
-                            if person['initials'] == initials:
-                                scheduled_people.append(person)
-                                break
+                        if not self.find_person_initials(initials,scheduled_people):
+                            for person in self.remaining_people:
+                                if person['initials'] == initials:
+                                    scheduled_people.append(person)
+                                    break
                     else:
                         for person in scheduled_people:
                             if person['initials'] == initials:
