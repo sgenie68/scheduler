@@ -72,15 +72,13 @@ class Scheduler:
                     initials, flag = pref['initials'], pref['flag']
                     if flag:
                         if not self.find_person_initials(initials,scheduled_people):
-                            for person in self.remaining_people:
-                                if person['initials'] == initials:
-                                    scheduled_people.append(person)
-                                    break
+                            person=self.find_person_initials(initials,self.remaining_people)
+                            if person:
+                                scheduled_people.append(person)
                     else:
-                        for person in scheduled_people:
-                            if person['initials'] == initials:
-                                scheduled_people.remove(person)
-                                break
+                        person=self.find_person_initials(initials,scheduled_people)
+                        if person:
+                            scheduled_people.remove(person)
 
 
         if len(scheduled_people)>num_people:
@@ -89,7 +87,6 @@ class Scheduler:
             scheduled_people.remove(selected_person)
         # Update state
         self.last_scheduled_people = [i["initials"] for i in scheduled_people]
-
         self.save_data()
         return scheduled_people
 
